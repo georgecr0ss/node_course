@@ -3,4 +3,10 @@ let faveIcon = require('./faveIcon')
 let addImages = require('./addImages').createImage
 let detailsPage = require('./imgDetails')
 let allImages = require('./allImages')
-module.exports = [faveIcon, homePage, addImages, detailsPage, allImages]
+let staticFiles = require('./staticFiles')
+module.exports = [faveIcon,
+                    homePage,
+                    addImages,
+                    detailsPage,
+                    allImages,
+                    staticFiles]

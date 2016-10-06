@@ -1,0 +1,11 @@
+body {
+    background-color: #fafafa;
+}
+header {
+    background-color: #ffff00;
+}
+
+header > span > a {
+    text-decoration: none;
+    color: #1e1e1e
+} 

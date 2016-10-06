@@ -1,6 +1,7 @@
 // let fs = require('fs')
 let url = require('url')
 let qs = require('querystring')
+let menu = require('./menu')
 let formData = []
 let createImage = (req, res) => {
   req.pathName = req.pathname ||
@@ -39,13 +40,8 @@ module.exports = {
 }
 
 function render (array) {
-  let html = `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Document</title>
-            </head>
-            <body>
+  let html = `
+               ${menu}
                <form action="/images/add" method="POST">
                 <input type="text" name="name">
                 <br/>
