@@ -1,7 +1,7 @@
 let url = require('url')
 let addedImages = require('./addImages').cars
 let menu = require('./menu')
-
+let qs = require('querystring')
 module.exports = (req, res) => {
   req.pathName = req.pathname ||
     url.parse(req.url).pathname
@@ -10,29 +10,74 @@ module.exports = (req, res) => {
   let currImage = addedImages[index]
   let path = '/images/details/' + index
   if (req.pathName === path) {
-    let htmlPice = `${menu}
-                  <p style="border: 1px solid #1e1e1e; width: 400px;">
-                    <span style="background-color: #ffff00; width: 100%;">
-                      <strong>
-                        ${currImage.name}
-                      </strong>
-                    </span> <br/>
-                    <a href="/images/details/${0}">
-                        <img
-                          src=${currImage.imageUrl}
-                          alt=${currImage.name}
-                          width=400
-                          height=auto />
-                      </a>
-                  </p>
-            </body>
-            </html>`
-    if (req.pathName === path) {
-      res.writeHead(200)
-      res.write(htmlPice)
+    if (req.method === 'POST') {
+      let currComment = {
+        id: '',
+        comment: ''
+      }
+      let body = []
+      let chunks = ''
+      req.on('data', (chunk) => {
+        body.push(chunk)
+      }).on('end', () => {
+        chunks = Buffer.concat(body).toString()
+        let parsed = qs.parse(chunks)
+        currComment.id = Date.now()
+        currComment.comment = parsed.comment
+        currImage.comments.unshift(currComment)
+      })
+      res.writeHead(302, {
+        'Location': path
+      })
+      res.write('working')
       res.end()
+    } else if (req.method === 'GET') {
+      let htmlPice = getHtml(menu, currImage, path, getCommentsAsHtml)
+      if (req.pathName === path) {
+        res.writeHead(200)
+        res.write(htmlPice)
+        res.end()
+      }
     }
   } else {
     return true
   }
+}
+
+function getHtml (menu, car, path, getCommentsAsHtml) {
+  let comments = car.comments.length !== 0 ? getCommentsAsHtml(car.comments) : ''
+  console.log(comments)
+  let htmlTop = menu
+  let carDetails = car
+  let actionUrl = path
+  let html = `${htmlTop}
+                <h2>${carDetails.name} s details page</h2>
+                  <p style="width: 400px;">
+                    <span style="background-color: #ffff00; width: 100%;">
+                      <strong>
+                      </strong>
+                    </span> <br/>
+                    <img
+                      src=${carDetails.imageUrl}
+                      alt=${carDetails.name}
+                      width=400
+                      height=auto />
+                  </p>
+               <form action="${actionUrl}" method="POST">
+                <input type="textarea" name="comment">
+                <input type="submit" value="Post comment">
+               </form>
+               ${comments}
+            </body>
+            </html>`
+  return html
+}
+
+function getCommentsAsHtml(comments) {
+  let commentsAsHtml = ''
+  for (let comment in comments) {
+    commentsAsHtml += `<p>${comments[comment].comment}</p>`
+  }
+
+  return commentsAsHtml
 }

@@ -7,22 +7,27 @@ body {
 }
 header {
     height: 40px;
-    background-color: #ffff00;
+    background-color: #004834;
     margin-bottom: 5px;
 }
 
-a {   
+header a {   
     padding: 7px;
     text-decoration: none;
-    color: #1e1e1e
+    color: #fafafa
 } 
 header div { 
     position: relative;
-    top: 8%;
+    top: 10%;
+    height: 80%;
+    width: auto; 
     display: inline-flex;
     flex-direction: column;
-    height: 80%;
-    width: auto;
-    border: 1px solid #1e1e1e;
     border-radius: 8%;
+}
+#addInfo {
+    width: 200px;
+    background-color:maroon;
+    color: white;
+    margin-top:5px;
 }
