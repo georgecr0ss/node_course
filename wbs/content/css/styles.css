@@ -1,11 +1,28 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
 body {
     background-color: #fafafa;
 }
 header {
+    height: 40px;
     background-color: #ffff00;
+    margin-bottom: 5px;
 }
 
-header > span > a {
+a {   
+    padding: 7px;
     text-decoration: none;
     color: #1e1e1e
 } 
+header div { 
+    position: relative;
+    top: 8%;
+    display: inline-flex;
+    flex-direction: column;
+    height: 80%;
+    width: auto;
+    border: 1px solid #1e1e1e;
+    border-radius: 8%;
+}

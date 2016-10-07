@@ -2,7 +2,6 @@ let fs = require('fs')
 let url = require('url')
 
 function getContentType (url) {
-  console.log(url)
   switch (true) {
     case url.endsWith('.js'):
       return 'application/javascript'
@@ -18,11 +17,8 @@ function getContentType (url) {
 module.exports = (req, res) => {
   req.pathName = req.pathname ||
       url.parse(req.url).pathname
-  console.log(req.pathName.includes('content'))
   if (req.pathName.includes('content')) {
     fs.readFile('.' + req.pathName, (err, data) => {
-      
-      console.log(data)
       if (err) {
         res.writeHead(404, {
           'Content-Type': 'text/html'
@@ -31,7 +27,6 @@ module.exports = (req, res) => {
         res.end()
         return true
       }
-      console.log(getContentType(req.pathName))
       res.writeHead(200, {
         'Content-Type': getContentType(req.pathName)
       })
