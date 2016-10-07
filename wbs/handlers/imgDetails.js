@@ -10,6 +10,12 @@ module.exports = (req, res) => {
   let currImage = addedImages[index]
   let path = '/images/details/' + index
   if (req.pathName === path) {
+    let htmlPice = getHtml(menu, currImage, path, getCommentsAsHtml)
+
+    res.writeHead(200)
+    res.write(htmlPice)
+    res.end()
+  } else if (req.pathName === (path + '/comment')) {
     if (req.method === 'POST') {
       let currComment = {
         id: '',
@@ -31,13 +37,6 @@ module.exports = (req, res) => {
       })
       res.write('working')
       res.end()
-    } else if (req.method === 'GET') {
-      let htmlPice = getHtml(menu, currImage, path, getCommentsAsHtml)
-      if (req.pathName === path) {
-        res.writeHead(200)
-        res.write(htmlPice)
-        res.end()
-      }
     }
   } else {
     return true
@@ -46,10 +45,10 @@ module.exports = (req, res) => {
 
 function getHtml (menu, car, path, getCommentsAsHtml) {
   let comments = car.comments.length !== 0 ? getCommentsAsHtml(car.comments) : ''
-  console.log(comments)
+  // console.log(comments)
   let htmlTop = menu
   let carDetails = car
-  let actionUrl = path
+  let actionUrl = path + '/comment'
   let html = `${htmlTop}
                 <h2>${carDetails.name} s details page</h2>
                   <p style="width: 400px;">
@@ -81,3 +80,4 @@ function getCommentsAsHtml(comments) {
 
   return commentsAsHtml
 }
+
