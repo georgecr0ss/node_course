@@ -1,0 +1,13 @@
+{
+  "name": "exam",
+  "description": "softuni nodeJS exam",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "GeorgeK",
+  "dependencies": {
+    "multiparty": "4.1.2",
+    "standard": "8.3.0"
+  }
+}
