@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+  <meta charset="UTF-8">
+  <title>Submit image</title>
+</head>
+<body>
+  <form method="POST" action="">
+    Name: <input id='name' name="name" type="text" />
+    Image: <input id='imageUrl' name="imageUrl" type="text" />
+    <input type="submit" value="Submit" />
+    {{#if formValue}}
+      {{#if validationFail}}
+          <p class='validation'>Please set a valid name and url</p>
+      {{else}}
+        {{#each data}}
+          <p>{{this.name}}</p>
+              <ul>
+                {{#each this.imageUrls}}
+                  <li><a href='{{this.id}}'>image</a></li>
+                {{/each}}
+              </ul>
+        {{/each}}
+      {{/if}}    
+    {{/if}}    
+  </form>
+</body>
+</html>

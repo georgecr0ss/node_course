@@ -1,0 +1,9 @@
+{
+  "name": "homework2", 
+  "description": "",
+  "main": "index.js", 
+  "dependencies": {
+    "multiparty": "4.1.2",
+    "standard": "8.3.0"
+  }
+}

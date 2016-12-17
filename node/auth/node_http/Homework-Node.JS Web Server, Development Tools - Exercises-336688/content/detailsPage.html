@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DetailView</title>
+   
+</head>
+<body>
+    <h1>Owner of image: {{name}}</h1>
+     Your image:
+  <div id="imageContainer">    
+       
+    <script>
+        (function(){
+            var img = document.createElement("IMG");
+            let decodedURI = `{{imageUrl}}`;
+            img.setAttribute("alt", "image");
+            img.setAttribute("width", "300px");
+            img.setAttribute("height", "300px");            
+            img.setAttribute("src", decodeURIComponent(decodedURI));
+            document.getElementById('imageContainer').appendChild(img);
+        })();
+    </script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+extends ../_layout
+block main-content
+  form(method="post" action="/articles/save")
+   lable(for="title") title
+   br
+   input(type="text" name="title" id="title")
+   br
+   lable(for="text") text
+   br
+   textarea(name="text" id="text")
+   br
+   input(type="submit" name="Submit")

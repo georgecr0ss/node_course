@@ -1,0 +1,25 @@
+extends ../_layout
+block main-content
+  h1 Create new user 
+  form(method="post", action="/users/create")
+    label(for="username") username
+    br
+    input(type="text" name="username" id="username")
+    br
+    label(for="password") password
+    br
+    input(type="password" name="password" id="password") 
+    br
+    label(for="confirmPassword") confirmPassword
+    br
+    input(type="password" name="confirmPassword" id="confirm-password")
+    br
+    label(for="firstName") firstName
+    br
+    input(type="text" name="firstName" id="firstName")
+    br
+    label(for="lastName") lastName
+    br
+    input(type="text" name="lastName" id="lastName")
+    br
+    input(type="submit" name="Submit")
